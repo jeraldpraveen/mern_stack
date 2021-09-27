@@ -2,8 +2,10 @@ const express = require("express");
 const { Mongoose } = require("mongoose");
 const app = express();
 const connectDB = require("./config/db");
+const morgan = require("morgan");
 
 //Init Middleware
+app.use(morgan("dev"));
 app.use(express.json({ extended: false }));
 
 //Define Routes
