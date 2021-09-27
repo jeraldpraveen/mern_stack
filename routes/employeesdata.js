@@ -37,10 +37,60 @@ router.post(
 );
 
 // @route      GET employeesdata
-// @description   Register An Employee
+// @description   Get All Employees Data
 // @access      Public
-// router.get("/", (req, res) => {
-//   res.json("Get Employee Data");
-// });
+router.get("/", async (req, res) => {
+  const findData = await Employees.find();
+  res.json(findData);
+});
+
+// @route      PUT employeesdata/update
+// @description   Update Employee Data
+// @access      Public
+router.put("/update", async (req, res) => {
+  console.log(req.body);
+  const { Name, Age, City, _id } = req.body;
+
+  // Build employeeDetails object
+  const employeeDetails = {};
+  if (Name) employeeDetails.Name = Name;
+  if (Age) employeeDetails.Age = Age;
+  if (City) employeeDetails.City = City;
+
+  try {
+    let employee = await Employees.findById(_id);
+
+    if (!employee) return res.status(404).json({ msg: "Contact not found" });
+
+    employee = await Employees.findByIdAndUpdate(
+      _id,
+      { $set: employeeDetails },
+      { new: true }
+    );
+
+    res.json(employee);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route     DELETE employeesdata/delete
+// @desc      Delete contact
+// @access    Public
+router.delete("/del/:id", async (req, res) => {
+  try {
+    let employee = await Employees.findById(req.params.id);
+
+    if (!employee) return res.status(404).json({ msg: "Employee not found" });
+
+    await Employees.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: "Employee removed" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
