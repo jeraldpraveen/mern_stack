@@ -3,6 +3,9 @@ const { Mongoose } = require("mongoose");
 const app = express();
 const connectDB = require("./config/db");
 
+//Init Middleware
+app.use(express.json({ extended: false }));
+
 //Define Routes
 app.use("/employeesdata", require("./routes/employeesdata"));
 
