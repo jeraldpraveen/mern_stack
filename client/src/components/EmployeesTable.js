@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class EmployeesTable extends Component {
   render() {
     return (
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th>Firstname</th>
