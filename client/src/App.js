@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import InputForm from "./components/InputForm";
 import EmployeesTable from "./components/EmployeesTable";
+import axios from "axios";
 
 class App extends Component {
   constructor() {
@@ -10,6 +11,9 @@ class App extends Component {
 
   create = (data) => {
     console.log(data);
+    axios
+      .get("http://localhost:5000/employeesdata", data)
+      .then((res) => console.log(res));
   };
 
   render() {
