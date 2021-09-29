@@ -6,27 +6,25 @@ export class EmployeesTable extends Component {
       <table className="table">
         <thead>
           <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-          </tr>
-          <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-          </tr>
-          <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-          </tr>
+          {this.props.getData.length > 0 ? (
+            this.props.getData.map((e) => (
+              <tr key={e._id}>
+                <td>{e.Name}</td>
+                <td>{e.Age}</td>
+                <td>{e.City}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>No Data</td>
+            </tr>
+          )}
         </tbody>
       </table>
     );

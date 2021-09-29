@@ -7,14 +7,26 @@ import axios from "axios";
 class App extends Component {
   constructor() {
     super();
+    this.state = { data: [] };
   }
 
-  create = (data) => {
-    console.log(data);
+  create = (newData) => {
+    console.log(newData);
     axios
-      .post("http://localhost:5000/employeesdata", data)
+      .post("http://localhost:5000/employeesdata", newData)
       .then((res) => console.log(res));
   };
+
+  getAll = () => {
+    axios.get("http://localhost:5000/employeesdata").then((res) => {
+      console.log(res.data);
+      this.setState({ data: res.data });
+    });
+  };
+
+  componentDidMount() {
+    this.getAll();
+  }
 
   render() {
     return (
@@ -24,7 +36,7 @@ class App extends Component {
             <InputForm myData={this.create} />
           </div>
           <div className="col-6">
-            <EmployeesTable />
+            <EmployeesTable getData={this.state.data} />
           </div>
         </div>
       </div>
