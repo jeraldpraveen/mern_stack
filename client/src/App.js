@@ -12,7 +12,7 @@ class App extends Component {
   create = (data) => {
     console.log(data);
     axios
-      .get("http://localhost:5000/employeesdata", data)
+      .post("http://localhost:5000/employeesdata", data)
       .then((res) => console.log(res));
   };
 
