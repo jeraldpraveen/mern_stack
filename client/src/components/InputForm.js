@@ -21,7 +21,12 @@ export class InputForm extends Component {
 
   formSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
+    let data = {
+      Name: this.state.Name,
+      Age: this.state.Age,
+      City: this.state.City,
+    };
+    this.props.myData(data);
   };
 
   render() {

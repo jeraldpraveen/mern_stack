@@ -8,12 +8,16 @@ class App extends Component {
     super();
   }
 
+  create = (data) => {
+    console.log(data);
+  };
+
   render() {
     return (
       <div className="container mt-4">
         <div className="row">
           <div className="col-6">
-            <InputForm />
+            <InputForm myData={this.create} />
           </div>
           <div className="col-6">
             <EmployeesTable />
